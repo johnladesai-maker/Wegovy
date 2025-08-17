@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wegovy劑量換算</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&display=swap');
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4">
+    <div class="max-w-md mx-auto">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Wegovy劑量換算</h1>
+        
+        <!-- 1.0mg -->
+        <div class="mb-4 p-4 rounded-lg shadow-md" style="background-color: #b97e41;">
+            <h2 class="text-lg font-semibold text-white mb-3">1.0mg</h2>
+            <input 
+                type="number" 
+                id="dose1" 
+                placeholder="例如: 0.25" 
+                class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400"
+                min="0"
+                step="0.01"
+                oninput="calculateDose('dose1', 'result1', 75, 1)"
+            >
+            <div class="mt-3 p-3 bg-white bg-opacity-20 rounded-md">
+                <span class="text-white font-medium">格數: </span>
+                <span id="result1" class="text-white font-bold text-lg">0</span>
+            </div>
+        </div>
+
+        <!-- 1.7mg -->
+        <div class="mb-4 p-4 rounded-lg shadow-md" style="background-color: #0192c1;">
+            <h2 class="text-lg font-semibold text-white mb-3">1.7mg</h2>
+            <input 
+                type="number" 
+                id="dose2" 
+                placeholder="例如: 1" 
+                class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400"
+                min="0"
+                step="0.01"
+                oninput="calculateDose('dose2', 'result2', 75, 1.7)"
+            >
+            <div class="mt-3 p-3 bg-white bg-opacity-20 rounded-md">
+                <span class="text-white font-medium">格數: </span>
+                <span id="result2" class="text-white font-bold text-lg">0</span>
+            </div>
+        </div>
+
+        <!-- 2.4mg -->
+        <div class="mb-4 p-4 rounded-lg shadow-md" style="background-color: #57656e;">
+            <h2 class="text-lg font-semibold text-white mb-3">2.4mg</h2>
+            <input 
+                type="number" 
+                id="dose3" 
+                placeholder="例如: 1" 
+                class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400"
+                min="0"
+                step="0.01"
+                oninput="calculateDose('dose3', 'result3', 75, 2.4)"
+            >
+            <div class="mt-3 p-3 bg-white bg-opacity-20 rounded-md">
+                <span class="text-white font-medium">格數: </span>
+                <span id="result3" class="text-white font-bold text-lg">0</span>
+            </div>
+        </div>
+
+        <!-- 0.5mg -->
+        <div class="mb-4 p-4 rounded-lg shadow-md" style="background-color: #d38aa8;">
+            <h2 class="text-lg font-semibold text-white mb-3">0.5mg</h2>
+            <input 
+                type="number" 
+                id="dose4" 
+                placeholder="例如: 0.25" 
+                class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400"
+                min="0"
+                step="0.01"
+                oninput="calculateDose('dose4', 'result4', 37, 0.5)"
+            >
+            <div class="mt-3 p-3 bg-white bg-opacity-20 rounded-md">
+                <span class="text-white font-medium">格數: </span>
+                <span id="result4" class="text-white font-bold text-lg">0</span>
+            </div>
+        </div>
+
+        <!-- 0.25mg -->
+        <div class="mb-4 p-4 rounded-lg shadow-md" style="background-color: #b8e1dc;">
+            <h2 class="text-lg font-semibold text-gray-800 mb-3">0.25mg</h2>
+            <input 
+                type="number" 
+                id="dose5" 
+                placeholder="例如: 0.25" 
+                class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent placeholder-gray-400"
+                min="0"
+                step="0.01"
+                oninput="calculateDose('dose5', 'result5', 37, 0.25)"
+            >
+            <div class="mt-3 p-3 bg-white bg-opacity-50 rounded-md">
+                <span class="text-gray-800 font-medium">格數: </span>
+                <span id="result5" class="text-gray-800 font-bold text-lg">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateDose(inputId, resultId, numerator, denominator) {
+            const input = document.getElementById(inputId);
+            const result = document.getElementById(resultId);
+            
+            let value = parseFloat(input.value);
+            
+            // 檢查是否為負數或無效值
+            if (isNaN(value) || value < 0) {
+                result.textContent = '0';
+                return;
+            }
+            
+            // 計算格數並四捨五入
+            const calculation = value * (numerator / denominator);
+            const roundedResult = Math.round(calculation);
+            
+            result.textContent = roundedResult;
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970533333124313b',t:'MTc1NTM5MjA2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
